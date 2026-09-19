@@ -31,22 +31,24 @@ npx serve .
 
 Then visit `http://localhost:8080`.
 
-## Deploy (GitHub Pages)
+## Deploy (GitHub Pages) — one-time setup
 
-This site is static (`index.html`, `styles.css`, `app.js`).
+The repo is **public** and a deploy workflow is already on `main`.
+You only need to flip Pages on once (GitHub requires the repo owner):
 
-1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` (or `arena/01a0bb67-arenaaiautomatemytask`) · folder `/ (root)`
-4. Save — site is public at the URL above after a minute or two
+### Option A — Branch deploy (fastest)
 
-Or enable via CLI:
+1. Open **[Settings → Pages](https://github.com/davidoyetayo56-afk/arenaaiautomatemytask/settings/pages)**
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**
+3. Branch: **`main`** · folder: **`/ (root)`** → **Save**
+4. Wait ~1 minute → site is live at the URL above
 
-```bash
-gh api -X POST repos/davidoyetayo56-afk/arenaaiautomatemytask/pages \
-  -f build_type=legacy \
-  -f source='{"branch":"main","path":"/"}'
-```
+### Option B — GitHub Actions
+
+1. Same Pages settings page
+2. Source: **GitHub Actions**
+3. Re-run the latest **Deploy to GitHub Pages** workflow under Actions
+   (workflow file: `.github/workflows/pages.yml`)
 
 ## Stack
 
