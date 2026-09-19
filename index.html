@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Automate My Task — AI-powered workflow automation with live animated examples." />
+  <title>Automate My Task — AI Workflow Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+  <!-- Ambient background -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="Automate My Task home">
+        <span class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <rect width="28" height="28" rx="8" fill="url(#logoGrad)"/>
+            <path d="M8 14.5L12 18.5L20 9.5" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                <stop stop-color="#7C5CFF"/>
+                <stop offset="1" stop-color="#00D4AA"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Automate<span class="logo-accent">MyTask</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#examples">Examples</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" type="button" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a class="btn btn-primary" href="#try">Try free</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile" hidden>
+      <a href="#examples">Examples</a>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a class="btn btn-primary" href="#try">Try free</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge reveal">
+        <span class="pulse-dot"></span>
+        AI-powered automation · live demos below
+      </div>
+      <h1 class="hero-title reveal">
+        Turn repetitive work into<br />
+        <span class="gradient-text">self-running workflows</span>
+      </h1>
+      <p class="hero-sub reveal">
+        Describe a task in plain English. Watch AI build, run, and explain the automation —
+        with live animations for every example so you always know what’s happening.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary btn-lg" href="#try">
+          Start automating
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-secondary btn-lg" href="#examples">
+          Watch examples
+        </a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="stat">
+          <strong data-count="120">0</strong><span>+</span>
+          <small>tasks automated</small>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <strong data-count="4">0</strong><span>x</span>
+          <small>faster on average</small>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <strong data-count="98">0</strong><span>%</span>
+          <small>setup success rate</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive prompt demo -->
+    <section class="try-section" id="try">
+      <div class="section-inner">
+        <div class="try-card reveal">
+          <div class="try-header">
+            <div class="window-dots"><span></span><span></span><span></span></div>
+            <span class="try-label">Describe a task</span>
+            <span class="try-status" id="tryStatus">Ready</span>
+          </div>
+          <div class="try-body">
+            <div class="prompt-row">
+              <span class="prompt-prefix">›</span>
+              <input
+                type="text"
+                id="taskInput"
+                class="task-input"
+                placeholder="e.g. Email me a daily summary of unread GitHub notifications"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <button class="btn btn-primary" id="runTask" type="button">
+                <span class="btn-label">Automate</span>
+                <span class="btn-spinner" hidden></span>
+              </button>
+            </div>
+            <div class="chip-row" id="chipRow" aria-label="Example prompts">
+              <button type="button" class="chip" data-prompt="Send a Slack digest of open PRs every morning at 9am">Slack PR digest</button>
+              <button type="button" class="chip" data-prompt="Rename and sort downloads into folders by file type nightly">Sort downloads</button>
+              <button type="button" class="chip" data-prompt="Scrape competitor pricing weekly and drop a CSV in Drive">Price scrape</button>
+              <button type="button" class="chip" data-prompt="Auto-reply to support tickets tagged billing with a template">Support auto-reply</button>
+            </div>
+            <div class="try-output" id="tryOutput" aria-live="polite">
+              <div class="output-empty">
+                <div class="output-empty-icon">✨</div>
+                <p>Type a task or pick a chip — watch the AI plan and animate the workflow.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Animated examples -->
+    <section class="examples" id="examples">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <p class="eyebrow">Live examples</p>
+          <h2>See every workflow <span class="gradient-text">in motion</span></h2>
+          <p class="section-sub">Each card plays a looping animation that explains the steps — hover or tap to focus.</p>
+        </div>
+
+        <div class="example-tabs reveal" role="tablist" aria-label="Example categories">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="email">Email &amp; inbox</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="files">Files &amp; data</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="team">Team sync</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="web">Web &amp; APIs</button>
+        </div>
+
+        <div class="example-grid">
+          <!-- Email example 1 -->
+          <article class="example-card reveal" data-category="email" data-example="inbox">
+            <div class="example-anim" id="anim-inbox" aria-hidden="true">
+              <div class="anim-stage inbox-stage">
+                <div class="mail-stack">
+                  <div class="mail-item m1"><span class="mail-dot unread"></span><div class="mail-lines"><i></i><i></i></div></div>
+                  <div class="mail-item m2"><span class="mail-dot unread"></span><div class="mail-lines"><i></i><i></i></div></div>
+                  <div class="mail-item m3"><span class="mail-dot unread"></span><div class="mail-lines"><i></i><i></i></div></div>
+                  <div class="mail-item m4"><span class="mail-dot"></span><div class="mail-lines"><i></i><i></i></div></div>
+                </div>
+                <div class="ai-scanner"><span></span></div>
+                <div class="mail-result">
+                  <div class="result-badge">3 labeled · 1 archived</div>
+                  <div class="result-tags">
+                    <span class="tag tag-invoice">Invoice</span>
+                    <span class="tag tag-lead">Lead</span>
+                    <span class="tag tag-noise">Noise</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">📬</span>
+                <span class="example-time">~2 min setup</span>
+              </div>
+              <h3>Smart inbox triage</h3>
+              <p>AI reads new mail, labels by intent, archives noise, and flags anything that needs you.</p>
+              <ol class="step-list" data-steps="inbox">
+                <li class="active"><span>1</span> Watch inbox</li>
+                <li><span>2</span> Classify with AI</li>
+                <li><span>3</span> Label &amp; route</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="inbox">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Email example 2 -->
+          <article class="example-card reveal" data-category="email" data-example="digest">
+            <div class="example-anim" id="anim-digest" aria-hidden="true">
+              <div class="anim-stage digest-stage">
+                <div class="digest-sources">
+                  <div class="src-pill s1">Gmail</div>
+                  <div class="src-pill s2">Slack</div>
+                  <div class="src-pill s3">GitHub</div>
+                </div>
+                <div class="digest-funnel">
+                  <div class="funnel-beam"></div>
+                  <div class="funnel-core">AI</div>
+                </div>
+                <div class="digest-card">
+                  <div class="digest-card-title">Morning digest</div>
+                  <div class="digest-lines">
+                    <div class="dline d1"></div>
+                    <div class="dline d2"></div>
+                    <div class="dline d3"></div>
+                  </div>
+                  <div class="digest-send">✉ Sent 9:00 AM</div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">☀️</span>
+                <span class="example-time">Daily · 9:00 AM</span>
+              </div>
+              <h3>Cross-app morning digest</h3>
+              <p>Pull signals from email, chat, and code — compress into one clear brief every morning.</p>
+              <ol class="step-list" data-steps="digest">
+                <li class="active"><span>1</span> Collect signals</li>
+                <li><span>2</span> Summarize</li>
+                <li><span>3</span> Deliver brief</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="digest">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Files example 1 -->
+          <article class="example-card reveal" data-category="files" data-example="sort" hidden>
+            <div class="example-anim" id="anim-sort" aria-hidden="true">
+              <div class="anim-stage sort-stage">
+                <div class="file-drop">
+                  <div class="file f-pdf">PDF</div>
+                  <div class="file f-img">IMG</div>
+                  <div class="file f-doc">DOC</div>
+                  <div class="file f-zip">ZIP</div>
+                  <div class="file f-xls">XLS</div>
+                </div>
+                <div class="sort-arrow">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                </div>
+                <div class="folder-row">
+                  <div class="folder fo-docs"><span>Docs</span><i class="count c-docs">0</i></div>
+                  <div class="folder fo-media"><span>Media</span><i class="count c-media">0</i></div>
+                  <div class="folder fo-other"><span>Other</span><i class="count c-other">0</i></div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">🗂️</span>
+                <span class="example-time">Nightly</span>
+              </div>
+              <h3>Auto-sort downloads</h3>
+              <p>Watch a folder, detect file types, rename with rules, and file everything into the right place.</p>
+              <ol class="step-list" data-steps="sort">
+                <li class="active"><span>1</span> Detect new files</li>
+                <li><span>2</span> Classify type</li>
+                <li><span>3</span> Move &amp; rename</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="sort">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Files example 2 -->
+          <article class="example-card reveal" data-category="files" data-example="sheet" hidden>
+            <div class="example-anim" id="anim-sheet" aria-hidden="true">
+              <div class="anim-stage sheet-stage">
+                <div class="sheet-grid">
+                  <div class="cell h">A</div><div class="cell h">B</div><div class="cell h">C</div>
+                  <div class="cell c1">…</div><div class="cell c2">…</div><div class="cell c3">…</div>
+                  <div class="cell c4">…</div><div class="cell c5">…</div><div class="cell c6">…</div>
+                  <div class="cell c7">…</div><div class="cell c8">…</div><div class="cell c9">…</div>
+                </div>
+                <div class="sheet-cursor"></div>
+                <div class="sheet-chart">
+                  <div class="bar b1"></div>
+                  <div class="bar b2"></div>
+                  <div class="bar b3"></div>
+                  <div class="bar b4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">📊</span>
+                <span class="example-time">On schedule</span>
+              </div>
+              <h3>Sheet → insight report</h3>
+              <p>Read a spreadsheet, clean rows, compute KPIs, and generate a chart-ready summary.</p>
+              <ol class="step-list" data-steps="sheet">
+                <li class="active"><span>1</span> Ingest rows</li>
+                <li><span>2</span> Clean &amp; compute</li>
+                <li><span>3</span> Chart &amp; share</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="sheet">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Team example 1 -->
+          <article class="example-card reveal" data-category="team" data-example="standup" hidden>
+            <div class="example-anim" id="anim-standup" aria-hidden="true">
+              <div class="anim-stage standup-stage">
+                <div class="avatar-row">
+                  <div class="avatar a1">A</div>
+                  <div class="avatar a2">B</div>
+                  <div class="avatar a3">C</div>
+                  <div class="avatar a4">D</div>
+                </div>
+                <div class="standup-bubbles">
+                  <div class="bubble bu1">Shipped auth fix ✓</div>
+                  <div class="bubble bu2">Blocked on API</div>
+                  <div class="bubble bu3">Design review today</div>
+                </div>
+                <div class="standup-board">
+                  <div class="board-col"><span class="dot done"></span> Done</div>
+                  <div class="board-col"><span class="dot wip"></span> Doing</div>
+                  <div class="board-col"><span class="dot block"></span> Blocked</div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">🧍</span>
+                <span class="example-time">Weekdays 10:00</span>
+              </div>
+              <h3>Async standup collector</h3>
+              <p>DM the team, gather updates, group by status, and post a clean board to the channel.</p>
+              <ol class="step-list" data-steps="standup">
+                <li class="active"><span>1</span> Nudge teammates</li>
+                <li><span>2</span> Parse updates</li>
+                <li><span>3</span> Post board</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="standup">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Team example 2 -->
+          <article class="example-card reveal" data-category="team" data-example="onboard" hidden>
+            <div class="example-anim" id="anim-onboard" aria-hidden="true">
+              <div class="anim-stage onboard-stage">
+                <div class="onboard-user">
+                  <div class="onboard-avatar">+</div>
+                  <div class="onboard-name">New hire</div>
+                </div>
+                <div class="onboard-checklist">
+                  <div class="check ch1"><span class="box"></span> Create accounts</div>
+                  <div class="check ch2"><span class="box"></span> Add to channels</div>
+                  <div class="check ch3"><span class="box"></span> Send welcome kit</div>
+                  <div class="check ch4"><span class="box"></span> Schedule 1:1s</div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">🚀</span>
+                <span class="example-time">On trigger</span>
+              </div>
+              <h3>New-hire onboarding</h3>
+              <p>When HR adds a person, spin up accounts, invites, docs, and calendar holds automatically.</p>
+              <ol class="step-list" data-steps="onboard">
+                <li class="active"><span>1</span> Detect hire</li>
+                <li><span>2</span> Provision access</li>
+                <li><span>3</span> Welcome sequence</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="onboard">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Web example 1 -->
+          <article class="example-card reveal" data-category="web" data-example="scrape" hidden>
+            <div class="example-anim" id="anim-scrape" aria-hidden="true">
+              <div class="anim-stage scrape-stage">
+                <div class="browser-frame">
+                  <div class="browser-bar"><i></i><i></i><i></i><div class="url-bar"></div></div>
+                  <div class="browser-page">
+                    <div class="price-row pr1"><span>$49</span></div>
+                    <div class="price-row pr2"><span>$52</span></div>
+                    <div class="price-row pr3"><span>$47</span></div>
+                  </div>
+                  <div class="scrape-cursor"></div>
+                </div>
+                <div class="scrape-table">
+                  <div class="t-head">CSV</div>
+                  <div class="t-row tr1">A · $49</div>
+                  <div class="t-row tr2">B · $52</div>
+                  <div class="t-row tr3">C · $47</div>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">🌐</span>
+                <span class="example-time">Weekly</span>
+              </div>
+              <h3>Competitor price watch</h3>
+              <p>Visit product pages, extract prices, write a CSV, and alert when something moves.</p>
+              <ol class="step-list" data-steps="scrape">
+                <li class="active"><span>1</span> Open pages</li>
+                <li><span>2</span> Extract prices</li>
+                <li><span>3</span> Save &amp; alert</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="scrape">Replay animation</button>
+            </div>
+          </article>
+
+          <!-- Web example 2 -->
+          <article class="example-card reveal" data-category="web" data-example="api" hidden>
+            <div class="example-anim" id="anim-api" aria-hidden="true">
+              <div class="anim-stage api-stage">
+                <div class="api-nodes">
+                  <div class="node n-trigger">Webhook</div>
+                  <div class="node n-transform">Transform</div>
+                  <div class="node n-dest">CRM</div>
+                </div>
+                <svg class="api-wires" viewBox="0 0 280 120" preserveAspectRatio="none">
+                  <path class="wire w1" d="M40 30 C100 30, 100 60, 140 60" fill="none" stroke-width="2"/>
+                  <path class="wire w2" d="M140 60 C180 60, 180 90, 240 90" fill="none" stroke-width="2"/>
+                </svg>
+                <div class="api-packet p1"></div>
+                <div class="api-packet p2"></div>
+                <div class="api-log">
+                  <code>POST /leads 201</code>
+                </div>
+              </div>
+            </div>
+            <div class="example-body">
+              <div class="example-meta">
+                <span class="example-icon">🔌</span>
+                <span class="example-time">Real-time</span>
+              </div>
+              <h3>Webhook → CRM pipeline</h3>
+              <p>Catch form webhooks, normalize fields, enrich with AI, and push clean leads into your CRM.</p>
+              <ol class="step-list" data-steps="api">
+                <li class="active"><span>1</span> Receive event</li>
+                <li><span>2</span> Transform</li>
+                <li><span>3</span> Push to CRM</li>
+              </ol>
+              <button class="btn btn-ghost btn-sm replay-btn" type="button" data-replay="api">Replay animation</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how" id="how">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>Three steps. Zero scripts.</h2>
+          <p class="section-sub">From idea to running automation without writing a single line of code.</p>
+        </div>
+        <div class="how-timeline">
+          <div class="how-step reveal">
+            <div class="how-num">01</div>
+            <div class="how-content">
+              <h3>Describe the task</h3>
+              <p>Write what you want in plain language — triggers, apps, and outcomes. No formulas required.</p>
+            </div>
+            <div class="how-visual hv1">
+              <div class="hv-line typing-demo">“When a lead fills the form, enrich it and notify sales…”</div>
+            </div>
+          </div>
+          <div class="how-step reveal">
+            <div class="how-num">02</div>
+            <div class="how-content">
+              <h3>AI builds the flow</h3>
+              <p>We map steps, pick connectors, and show a visual plan you can tweak before anything runs.</p>
+            </div>
+            <div class="how-visual hv2">
+              <div class="flow-mini">
+                <span>Trigger</span><i></i><span>AI</span><i></i><span>Action</span>
+              </div>
+            </div>
+          </div>
+          <div class="how-step reveal">
+            <div class="how-num">03</div>
+            <div class="how-content">
+              <h3>Run, watch, improve</h3>
+              <p>Live run logs and step animations make failures obvious. Iterate in one click.</p>
+            </div>
+            <div class="how-visual hv3">
+              <div class="run-bars">
+                <div class="rb r1"></div>
+                <div class="rb r2"></div>
+                <div class="rb r3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <p class="eyebrow">Built for clarity</p>
+          <h2>UX that teaches while it runs</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon fi1">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <h3>Step-by-step animations</h3>
+            <p>Every example loops through real steps so new users learn by watching, not reading docs.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+            </div>
+            <h3>Live run feedback</h3>
+            <p>Status chips, progress bars, and success states keep you oriented while a flow executes.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <h3>Modular connectors</h3>
+            <p>Email, Slack, Sheets, Drive, webhooks, and more — mix them into one readable plan.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <h3>Schedules &amp; triggers</h3>
+            <p>Cron, webhooks, or “when this happens” events — pick what fits the job.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Safe by default</h3>
+            <p>Preview mode, dry-runs, and permission scopes so nothing fires until you say go.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon fi6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3>Explainable plans</h3>
+            <p>Plain-language step lists next to every animation — always know why something ran.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band">
+      <div class="section-inner reveal">
+        <h2>Ready to stop doing it by hand?</h2>
+        <p>Pick an example above, or describe your own task — the first automation is free.</p>
+        <a class="btn btn-primary btn-lg" href="#try">Build my first flow</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section-inner footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text">Automate<span class="logo-accent">MyTask</span></span>
+        <p>AI workflow automation with live, animated explanations.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#examples">Examples</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="https://github.com/davidoyetayo56-afk/arenaaiautomatemytask" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> AutomateMyTask · Open source on GitHub</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
